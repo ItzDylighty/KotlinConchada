@@ -27,7 +27,7 @@ fun main() {
                 "D" -> 350F
                 "V" -> 500F
                 else -> {
-                    println("Invalid ticket type. Defaulting to Regular (₱250).")
+                    println("Invalid ticket type.")
                     250F
                 }
             }
@@ -49,7 +49,7 @@ fun main() {
             totalTickets++
             totalSales += finalPrice
 
-            println("Ticket price: ₱$finalPrice (Discount Applied: ${String.format("%.2f", discount * 100)}%)")
+            println("Ticket price: $finalPrice (Discount Applied: ${String.format("%.2f", discount * 100)}%)")
         }
 
         println()
@@ -57,13 +57,13 @@ fun main() {
         println("Child Tickets Sold: $childCount")
         println("Adult Tickets Sold: $adultCount")
         println("Senior Tickets Sold: $seniorCount")
-        println("Total Sales: ₱$totalSales")
+        println("Total Sales: $totalSales")
         println("All ticket prices: $ticketPrices")
 
         print("\nEnter a ticket price to search: ")
         val searchPrice = readln().toFloat()
         if (ticketPrices.contains(searchPrice)) {
-            println("A ticket with price ₱$searchPrice found at index ${ticketPrices.indexOf(searchPrice)}")
+            println("A ticket with price $searchPrice found at index ${ticketPrices.indexOf(searchPrice)}")
         } else {
             println("No ticket with price ₱$searchPrice found.")
         }
