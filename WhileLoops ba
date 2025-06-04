@@ -1,0 +1,81 @@
+fun main() {
+    val ticketPrices = mutableListOf<Float>()
+    var totalTickets = 0
+    var totalSales = 0F
+    var childCount = 0
+    var adultCount = 0
+    var seniorCount = 0
+
+    println("Welcome to the Cinema Ticket Booth")
+
+    var continueProgram = true
+
+    while (continueProgram) {
+        print("\nEnter the number of customers: ")
+        val numCustomers = readln().toInt()
+
+        for (i in 1..numCustomers) {
+            println("\nCustomer $i")
+
+            print("Enter age: ")
+            val age = readln().toInt()
+            print("Enter ticket type [R-Regular, D-3D, V-VIP]: ")
+            val type = readln().uppercase()
+
+            val basePrice = when (type) {
+                "R" -> 250F
+                "D" -> 350F
+                "V" -> 500F
+                else -> {
+                    println("Invalid ticket type. Defaulting to Regular (₱250).")
+                    250F
+                }
+            }
+
+            val discount = when {
+                age <= 12 -> 0.30F
+                age >= 60 -> 0.50F
+                else -> 0.0F
+            }
+
+            when {
+                age <= 12 -> childCount++
+                age >= 60 -> seniorCount++
+                else -> adultCount++
+            }
+
+            val finalPrice = calculateFinalPrice(basePrice, discount)
+            ticketPrices.add(finalPrice)
+            totalTickets++
+            totalSales += finalPrice
+
+            println("Ticket price: ₱$finalPrice (Discount Applied: ${String.format("%.2f", discount * 100)}%)")
+        }
+
+        println()
+        println("Total Tickets Sold: $totalTickets")
+        println("Child Tickets Sold: $childCount")
+        println("Adult Tickets Sold: $adultCount")
+        println("Senior Tickets Sold: $seniorCount")
+        println("Total Sales: ₱$totalSales")
+        println("All ticket prices: $ticketPrices")
+
+        print("\nEnter a ticket price to search: ")
+        val searchPrice = readln().toFloat()
+        if (ticketPrices.contains(searchPrice)) {
+            println("A ticket with price ₱$searchPrice found at index ${ticketPrices.indexOf(searchPrice)}")
+        } else {
+            println("No ticket with price ₱$searchPrice found.")
+        }
+
+        print("\nDo you want to process another batch of customers? (Y/N): ")
+        val continueInput = readln().uppercase()
+        continueProgram = continueInput == "Y"
+    }
+
+    println("\nThank you for using the Cinema Ticket Booth!")
+}
+
+fun calculateFinalPrice(basePrice: Float, discount: Float): Float {
+    return basePrice - (basePrice * discount)
+}
