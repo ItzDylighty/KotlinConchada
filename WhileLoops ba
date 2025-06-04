@@ -1,3 +1,9 @@
+/* Dwayne Andrei Tan
+Cinema ticketing system calculates Ticket prices based on
+User Age and Ticket Type. Applies discount, See total sales and tickets,
+and allows the user to search specific ticket prices.
+ */
+
 fun main() {
     val ticketPrices = mutableListOf<Float>()
     var totalTickets = 0
